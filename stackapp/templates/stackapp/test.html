@@ -1,5 +1,33 @@
-<form method="post">
+{% if form %}
+<form method="get">
     {% csrf_token %}
 {{ form.as_p }}
     <button type="submit">click me</button>
 </form>
+{% endif %}
+<ul>
+{% for result in response %}
+    <li><a href="{{ result.link }}">{{ result.title }}</a> </li>
+{% endfor %}
+</ul>
+{% if response.has_other_pages %}
+  <ul class="pagination">
+    {% if response.has_previous %}
+      <li><a href="{{ request.get_full_path }}&page={{ response.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in response.paginator.page_range %}
+      {% if response.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="{{ request.get_full_path }}&page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if response.has_next %}
+      <li><a href="{{ request.get_full_path }}&page={{ response.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
