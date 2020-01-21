@@ -16,8 +16,6 @@ class StackAPIQuestion:
     title = None
 
     def __init__(self, data):
-        print(data)
-        print(type(data))
         self.tags = data['tags']
         self.owner = data['owner']
         self.is_answered = data['is_answered']
