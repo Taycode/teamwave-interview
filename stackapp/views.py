@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from .utils import StackAPIConsumer
+from .utils import StackAPIConsumer, StackAPIQuestion
 from .forms import StackAPIConsumerForm
 
 
@@ -11,5 +11,11 @@ def test(request):
     else:
         form = StackAPIConsumerForm(request.POST or None)
         if form.is_valid():
-            StackAPIConsumer.consume(form.cleaned_data)
-            return HttpResponse(form.cleaned_data)
+            res = StackAPIConsumer.consume(form.cleaned_data)
+
+            data = []
+            for response in res.json()['items']:
+                data.append(StackAPIQuestion(response))
+            print(data)
+            args = {'response': data}
+            return render(request, 'stackapp/result.html', args)
