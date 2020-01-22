@@ -11,7 +11,7 @@ class StackAPIConsumerForm(forms.Form):
     order = forms.ChoiceField(choices=order_choice)
     sort = forms.ChoiceField(choices=sort_choice)
     intitle = forms.CharField(required=False)
-    fromdate = forms.DateField(required=False)
+    fromdate = forms.DateField(required=False, widget=forms.DateInput())
     min = forms.DateField(required=False)
     tagged = forms.CharField(required=False)
 

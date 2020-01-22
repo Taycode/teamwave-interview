@@ -1,4 +1,5 @@
 import requests
+from datetime import datetime
 
 
 class StackAPIQuestion:
@@ -40,11 +41,15 @@ class StackAPIConsumer:
 
     params = {
         'site': 'stackoverflow',
-        'tagged': 'java',
     }
 
     @classmethod
     def consume(cls, data):
+        date = data['fromdate']
+        if date is not None:
+            date = datetime(year=date.year, month=date.month, day=date.day)
+            milliseconds = int(round(date.timestamp()))
+            data['fromdate'] = milliseconds
         cls.params.update(data)
         r = requests.get(cls.url, params=cls.params)
         return r

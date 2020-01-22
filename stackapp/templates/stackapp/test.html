@@ -13,7 +13,7 @@
 {% if response.has_other_pages %}
   <ul class="pagination">
     {% if response.has_previous %}
-      <li><a href="{{ request.get_full_path }}&the_page={{ response.previous_page_number }}">&laquo;</a></li>
+      <li><a href="{{ url }}&the_page={{ response.previous_page_number }}">&laquo;</a></li>
     {% else %}
       <li class="disabled"><span>&laquo;</span></li>
     {% endif %}
@@ -21,13 +21,18 @@
       {% if response.number == i %}
         <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
       {% else %}
-        <li><a href="{{ request.get_full_path }}&the_page={{ i }}">{{ i }}</a></li>
+        <li><a href="{{ url }}&the_page={{ i }}">{{ i }}</a></li>
       {% endif %}
     {% endfor %}
     {% if response.has_next %}
-      <li><a href="{{ request.get_full_path }}&the_page={{ response.next_page_number }}">&raquo;</a></li>
+      <li><a href="{{ url }}&the_page={{ response.next_page_number }}">&raquo;</a></li>
     {% else %}
       <li class="disabled"><span>&raquo;</span></li>
     {% endif %}
   </ul>
 {% endif %}
+
+<script>
+    form_data =document.getElementById('id_fromdate');
+    form_data.type = 'date';
+</script>
