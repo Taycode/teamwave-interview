@@ -14,6 +14,3 @@ class StackAPIConsumerForm(forms.Form):
     fromdate = forms.DateField(required=False, widget=forms.DateInput())
     min = forms.DateField(required=False)
     tagged = forms.CharField(required=False)
-
-
-
