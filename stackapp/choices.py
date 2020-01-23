@@ -1,6 +1,6 @@
 order_choice = (
-    ('desc', 'desc'),
-    ('asc', 'asc')
+    ('desc', 'descending'),
+    ('asc', 'ascending')
 )
 
 sort_choice = (

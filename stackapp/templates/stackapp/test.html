@@ -1,10 +1,14 @@
-{% if form %}
-<form method="get">
-    {% csrf_token %}
-{{ form.as_p }}
-    <button type="submit">click me</button>
-</form>
-{% endif %}
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>StackConsumer APP</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link href="{% static 'stackapp/style.css' %}" rel="stylesheet">
+</head>
+
 <ul>
 {% for result in response %}
     <li><a href="{{ result.link }}">{{ result.title }}</a> </li>
@@ -32,9 +36,35 @@
   </ul>
 {% endif %}
 
+
+  <body>
+    {% if form %}
+    <form method="get" class="decor">
+      <div class="form-left-decoration"></div>
+      <div class="form-right-decoration"></div>
+      <div class="circle"></div>
+      <div class="form-inner">
+        <h1 align="center">Stack Consumer APP</h1>
+            {{form.page|attr:"placeholder:page"}}
+            {{form.todate|attr:"placeholder:To Date"}}
+            {{form.max|attr:"placeholder:Max"}}
+            {{form.nottagged|attr:"placeholder:Not Tagged"}}
+            {{form.pagesize|attr:"placeholder:Page Size"}}
+            {{form.order|attr:"placeholder:Order"}}
+            {{form.sort|attr:"placeholder:sort"}}
+            {{form.intitle|attr:"placeholder:in title"}}
+            {{form.fromdate|attr:"placeholder:From Date"}}
+            {{form.min|attr:"placeholder:Min"}}
+            {{form.tagged|attr:"placeholder:Tagged"}}
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+    {% endif %}
+  </body>
 <script>
     form_data =document.getElementById('id_fromdate');
     form_data.type = 'date';
     form_data =document.getElementById('id_todate');
     form_data.type = 'date';
 </script>
+</html>

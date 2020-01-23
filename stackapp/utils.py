@@ -39,9 +39,7 @@ class StackAPIConsumer:
 
     url = 'https://api.stackexchange.com/2.2/search'
 
-    params = {
-        'site': 'stackoverflow',
-    }
+    params = {'site': 'stackoverflow'}
 
     @classmethod
     def consume(cls, data):
@@ -50,7 +48,12 @@ class StackAPIConsumer:
             date = datetime(year=date.year, month=date.month, day=date.day)
             milliseconds = int(round(date.timestamp()))
             data['fromdate'] = milliseconds
+        date = data['todate']
+        if date is not None:
+            date = datetime(year=date.year, month=date.month, day=date.day)
+            milliseconds = int(round(date.timestamp()))
+            data['todate'] = milliseconds
+        print(data)
         cls.params.update(data)
-        r = requests.get(cls.url, params=cls.params)
-        return r
-
+        response = requests.get(cls.url, params=cls.params)
+        return response
